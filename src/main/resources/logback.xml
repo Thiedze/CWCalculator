@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>CWCalculator - %date [%thread] %-5level %logger{36} - %message%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILE-ENGINE"
+    class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <prudent>true</prudent>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${catalina.base}/logs/CWCalculator_%d{yyyy-MM-dd}.log
+      </fileNamePattern>
+    </rollingPolicy>
+    <encoder>
+      <pattern>CWCalculator - %date [%thread] %-5level %logger{36} - %message%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger
+    name="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator"
+    level="TRACE"/>
+  <root level="INFO">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE-ENGINE"/>
+  </root>
+
+  <logger name="org.springframework.ws.client.MessageTracing.sent"
+    level="TRACE"/>
+  <logger name="org.springframework.ws.client.MessageTracing.received"
+    level="TRACE"/>
+  <logger name="org.springframework.ws.server.MessageTracing"
+    level="TRACE"/>
+</configuration>
