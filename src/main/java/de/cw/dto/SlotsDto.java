@@ -8,8 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SlotsDto {
 
-    private SlotDto  digit_one;
+    private SlotDto  digitOne;
 
-    private SlotDto digit_two;
+    private SlotDto digitTwo;
 
 }

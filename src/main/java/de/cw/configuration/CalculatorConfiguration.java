@@ -1,6 +1,7 @@
 package de.cw.configuration;
 
 import de.cw.domain.CalculatorUser;
+import de.cw.service.CalculatorService;
 import java.util.HashMap;
 import java.util.Map;
 import javax.naming.NamingException;
@@ -18,6 +19,9 @@ public class CalculatorConfiguration {
 
     @Value("${users}")
     private String usernameAndPasswordsString;
+
+    @Value("${applicationId}")
+    public String awsApplicationId;
 
     private Map<String, CalculatorUser> users = null;
 
@@ -44,4 +48,13 @@ public class CalculatorConfiguration {
         return users;
     }
 
+    @Bean
+    public String applicationId() {
+        return awsApplicationId;
+    }
+
+    @Bean
+    public CalculatorService calculatorService() {
+        return new CalculatorService();
+    }
 }

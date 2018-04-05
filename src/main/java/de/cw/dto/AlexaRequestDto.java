@@ -7,6 +7,8 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AlexaRequestDto {
 
+    private SessionDto session;
+
     private RequestDto request;
 
 }

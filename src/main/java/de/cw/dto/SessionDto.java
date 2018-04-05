@@ -5,13 +5,8 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class IntentDto {
+public class SessionDto {
 
-    private IntentNameDto name;
-
-    private String confirmationStatus;
-
-    private SlotsDto slots;
-
+    private ApplicationDto application;
 
 }

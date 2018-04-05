@@ -2,7 +2,10 @@ package de.cw.controller;
 
 import de.cw.dto.AlexaRequestDto;
 import de.cw.dto.AlexaResponseDto;
+import de.cw.exception.PermissionDeniedException;
+import de.cw.service.CalculatorService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +17,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/v1", method = RequestMethod.POST)
 public class CalculatorPostController {
 
+    @Autowired
+    private String applicationId;
+
+    @Autowired
+    private CalculatorService calculatorService;
+
     @RequestMapping(value = "/request")
     @ResponseBody
     public AlexaResponseDto createCustomerBankAccount(@RequestBody AlexaRequestDto alexaRequestDto) {
-        log.info("Post");
-        AlexaResponseDto alexaResponseDto = new AlexaResponseDto();
-        alexaResponseDto.getResponse().getOutputSpeech().setText("42");
-        return alexaResponseDto;
+        log.info("Post applicationId: " + alexaRequestDto.getSession().getApplication().getApplicationId());
+        if(applicationId.equals(alexaRequestDto.getSession().getApplication().getApplicationId())) {
+            return calculatorService.interprete(alexaRequestDto);
+        } else {
+            throw new PermissionDeniedException();
+        }
     }
 
 }
