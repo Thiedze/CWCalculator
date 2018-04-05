@@ -2,7 +2,9 @@ package de.cw.configuration;
 
 import de.cw.domain.CalculatorUser;
 import de.cw.service.CalculatorService;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.naming.NamingException;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,9 +23,11 @@ public class CalculatorConfiguration {
     private String usernameAndPasswordsString;
 
     @Value("${applicationId}")
-    public String awsApplicationId;
+    public String awsApplicationIdAsString;
 
     private Map<String, CalculatorUser> users = null;
+
+    private List<String> awsApplicationIds = null;
 
     @Bean
     public static PropertyPlaceholderConfigurer propertyConfigurer() throws NamingException {
@@ -49,8 +53,15 @@ public class CalculatorConfiguration {
     }
 
     @Bean
-    public String applicationId() {
-        return awsApplicationId;
+    public List<String> applicationIds() {
+        if (awsApplicationIds == null) {
+            awsApplicationIds = new ArrayList<>();
+
+            for (String awsApplicationId : awsApplicationIdAsString.split(";")) {
+                awsApplicationIds.add(awsApplicationId);
+            }
+        }
+        return awsApplicationIds;
     }
 
     @Bean
