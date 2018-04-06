@@ -1,17 +1,19 @@
 package de.cw.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class CalculatorException extends RuntimeException {
 
     @Getter
-    private final HttpStatus httpStatus;
+    final String description;
 
     @Getter
-    final String description;
+    private final HttpStatus httpStatus;
 
     public CalculatorException(HttpStatus httpStatus, String description) {
         super();

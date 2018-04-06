@@ -11,9 +11,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @Slf4j
 @ControllerAdvice
-public class CalculatorResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+class CalculatorResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({CalculatorException.class })
+    @ExceptionHandler({CalculatorException.class})
     public ResponseEntity<Object> handleCalculatorException(CalculatorException exception) {
         log.warn(exception.getClass() + ", " + exception.getDescription());
         return new ResponseEntity<>(exception.getDescription(), new HttpHeaders(), exception.getHttpStatus());

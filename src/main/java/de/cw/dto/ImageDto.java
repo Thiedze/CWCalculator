@@ -3,7 +3,7 @@ package de.cw.dto;
 import lombok.Data;
 
 @Data
-public class ImageDto {
+class ImageDto {
 
     private String smallImageUrl;
 

@@ -3,6 +3,7 @@ package de.cw.configuration;
 import de.cw.domain.CalculatorUser;
 import de.cw.service.CalculatorService;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,15 +16,15 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.jndi.JndiLocatorDelegate;
 
 @Configuration
-public class CalculatorConfiguration {
+class CalculatorConfiguration {
 
     private static final JndiLocatorDelegate jndi = JndiLocatorDelegate.createDefaultResourceRefLocator();
 
+    @Value("${applicationId}")
+    private String awsApplicationIdAsString;
+
     @Value("${users}")
     private String usernameAndPasswordsString;
-
-    @Value("${applicationId}")
-    public String awsApplicationIdAsString;
 
     private Map<String, CalculatorUser> users = null;
 
@@ -56,10 +57,7 @@ public class CalculatorConfiguration {
     public List<String> applicationIds() {
         if (awsApplicationIds == null) {
             awsApplicationIds = new ArrayList<>();
-
-            for (String awsApplicationId : awsApplicationIdAsString.split(";")) {
-                awsApplicationIds.add(awsApplicationId);
-            }
+            Collections.addAll(awsApplicationIds, awsApplicationIdAsString.split(";"));
         }
         return awsApplicationIds;
     }

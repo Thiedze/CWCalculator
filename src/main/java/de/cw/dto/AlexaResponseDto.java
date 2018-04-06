@@ -12,7 +12,4 @@ public class AlexaResponseDto {
     @Getter
     private ResponseDto response = new ResponseDto();
 
-    @Getter
-    private Boolean shouldEndSession = true;
-
 }

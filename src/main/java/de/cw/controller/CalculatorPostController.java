@@ -27,9 +27,11 @@ public class CalculatorPostController {
     @RequestMapping(value = "/request")
     @ResponseBody
     public AlexaResponseDto createCustomerBankAccount(@RequestBody AlexaRequestDto alexaRequestDto) {
-        log.info("Post applicationId: " + alexaRequestDto.getSession().getApplication().getApplicationId());
-        if(applicationIds.contains(alexaRequestDto.getSession().getApplication().getApplicationId())) {
-            return calculatorService.interprete(alexaRequestDto);
+        log.info(alexaRequestDto.toString());
+        if (applicationIds.contains(alexaRequestDto.getSession().getApplication().getApplicationId())) {
+            AlexaResponseDto alexaResponseDto = calculatorService.interprete(alexaRequestDto);
+            log.info(alexaResponseDto.toString());
+            return alexaResponseDto;
         } else {
             throw new PermissionDeniedException();
         }

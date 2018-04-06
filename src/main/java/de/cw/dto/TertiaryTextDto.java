@@ -3,7 +3,7 @@ package de.cw.dto;
 import lombok.Data;
 
 @Data
-public class TertiaryTextDto {
+class TertiaryTextDto {
 
     private String text;
 
