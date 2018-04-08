@@ -5,12 +5,8 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AlexaRequest {
+public class Device {
 
-    private Session session;
-
-    private Request request;
-
-    private Context context;
+    private SupportedInterfaces supportedInterfaces;
 
 }

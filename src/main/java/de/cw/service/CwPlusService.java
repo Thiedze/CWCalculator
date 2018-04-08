@@ -1,22 +1,37 @@
 package de.cw.service;
 
+import de.cw.domain.request.AlexaRequest;
 import de.cw.domain.request.Intent;
 import de.cw.domain.response.AlexaResponse;
 import de.cw.domain.response.Card;
 import de.cw.domain.response.Directive;
 import de.cw.domain.response.Reprompt;
 import de.cw.domain.response.Source;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 
+@Slf4j
 public class CwPlusService {
 
-    public AlexaResponse response(Intent intent) {
+    public AlexaResponse response(AlexaRequest alexaRequest) {
         AlexaResponse alexaResponse = new AlexaResponse();
-        if (intent != null) {
-            alexaResponse.getResponse().getOutputSpeech().setText(getIntentText(intent));
-            alexaResponse.getResponse().setReprompt(getReprompt(intent));
-            alexaResponse.getResponse().setCard(getIntentCard(intent));
-            //alexaResponse.getResponse().getDirectives().add(getIntentDirective(intent));
+        try {
+            Intent intent = alexaRequest.getRequest().getIntent();
+            if (intent != null) {
+                alexaResponse.getResponse().getOutputSpeech().setText(getIntentText(intent));
+                alexaResponse.getResponse().setReprompt(getReprompt(intent));
+                alexaResponse.getResponse().setCard(getIntentCard(intent));
+                if (alexaRequest.getContext().getSystem().getDevice().getSupportedInterfaces().getDisplay() != null) {
+                    alexaResponse.getResponse().getDirectives().add(getIntentDirective(intent));
+                }
+            } else {
+                alexaResponse.getResponse().setShouldEndSession(true);
+                alexaResponse.getResponse().getOutputSpeech().setText("Es ist ein Fehler aufgetreten.");
+            }
+        } catch (Exception exception) {
+            log.error(exception.getMessage());
+            alexaResponse.getResponse().setShouldEndSession(true);
+            alexaResponse.getResponse().getOutputSpeech().setText("Es ist ein Fehler aufgetreten.");
         }
         return alexaResponse;
     }
@@ -55,7 +70,7 @@ public class CwPlusService {
 
                 output = "Die Campuswoche hat die korrekte Antwort berechnet. \nSie lautet\n\n " + (digitOneValue
                     + digitTwoValue) + ". \n\n\n";
-                output += "Stelle mir eine weitere Aufgabe. Ich kann addieren.";
+                output += "Stelle mir eine weitere Aufgabe.";
             }
         }
         return output;

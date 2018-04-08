@@ -1,6 +1,8 @@
 package de.cw.domain.response;
 
 import java.security.SecureRandom;
+import java.util.Date;
+import javax.xml.datatype.XMLGregorianCalendar;
 import lombok.Data;
 import lombok.Getter;
 
@@ -29,8 +31,7 @@ public class Template {
     }
 
     public String getToken() {
-        byte bytes[] = new byte[20];
-        new SecureRandom().nextBytes(bytes);
-        return bytes.toString();
+        Date date = new Date();
+        return new Integer(Math.abs(date.hashCode())).toString();
     }
 }

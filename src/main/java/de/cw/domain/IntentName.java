@@ -2,6 +2,6 @@ package de.cw.domain;
 
 public enum IntentName {
 
-    CWPlus, CWStop;
+    CWPlus, CWStop, CWInfo;
 
 }
