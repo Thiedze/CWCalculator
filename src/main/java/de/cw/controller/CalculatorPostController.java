@@ -1,7 +1,7 @@
 package de.cw.controller;
 
-import de.cw.dto.AlexaRequestDto;
-import de.cw.dto.AlexaResponseDto;
+import de.cw.domain.request.AlexaRequest;
+import de.cw.domain.response.AlexaResponse;
 import de.cw.exception.PermissionDeniedException;
 import de.cw.service.CalculatorService;
 import java.util.List;
@@ -26,12 +26,12 @@ public class CalculatorPostController {
 
     @RequestMapping(value = "/request")
     @ResponseBody
-    public AlexaResponseDto createCustomerBankAccount(@RequestBody AlexaRequestDto alexaRequestDto) {
-        log.info(alexaRequestDto.toString());
-        if (applicationIds.contains(alexaRequestDto.getSession().getApplication().getApplicationId())) {
-            AlexaResponseDto alexaResponseDto = calculatorService.interprete(alexaRequestDto);
-            log.info(alexaResponseDto.toString());
-            return alexaResponseDto;
+    public AlexaResponse createCustomerBankAccount(@RequestBody AlexaRequest alexaRequest) {
+        log.info(alexaRequest.toString());
+        if (applicationIds.contains(alexaRequest.getSession().getApplication().getApplicationId())) {
+            AlexaResponse alexaResponse = calculatorService.interprete(alexaRequest);
+            log.info(alexaResponse.toString());
+            return alexaResponse;
         } else {
             throw new PermissionDeniedException();
         }

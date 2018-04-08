@@ -1,9 +1,9 @@
-package de.cw.dto;
+package de.cw.domain.response;
 
 import lombok.Data;
 
 @Data
-class ImageDto {
+public class Image {
 
     private String smallImageUrl;
 

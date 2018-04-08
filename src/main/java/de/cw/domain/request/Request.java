@@ -1,11 +1,11 @@
-package de.cw.dto;
+package de.cw.domain.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RequestDto {
+public class Request {
 
     private String type;
 
@@ -15,6 +15,6 @@ public class RequestDto {
 
     private String locale;
 
-    private IntentDto intent;
+    private Intent intent;
 
 }

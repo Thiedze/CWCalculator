@@ -1,12 +1,12 @@
-package de.cw.dto;
+package de.cw.domain.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SessionDto {
+public class Session {
 
-    private ApplicationDto application;
+    private Application application;
 
 }

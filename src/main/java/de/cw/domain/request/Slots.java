@@ -1,14 +1,14 @@
-package de.cw.dto;
+package de.cw.domain.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AlexaRequestDto {
+public class Slots {
 
-    private SessionDto session;
+    private Slot digitOne;
 
-    private RequestDto request;
+    private Slot digitTwo;
 
 }

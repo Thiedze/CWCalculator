@@ -1,16 +1,17 @@
-package de.cw.dto;
+package de.cw.domain.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import de.cw.domain.IntentName;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class IntentDto {
+public class Intent {
 
-    private IntentNameDto name;
+    private IntentName name;
 
     private String confirmationStatus;
 
-    private SlotsDto slots;
+    private Slots slots;
 
 }

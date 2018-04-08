@@ -1,14 +1,12 @@
-package de.cw.dto;
+package de.cw.domain.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SlotsDto {
+public class Application {
 
-    private SlotDto digitOne;
-
-    private SlotDto digitTwo;
+    private String applicationId;
 
 }
