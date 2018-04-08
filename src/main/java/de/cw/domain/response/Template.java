@@ -1,8 +1,6 @@
 package de.cw.domain.response;
 
-import java.security.SecureRandom;
 import java.util.Date;
-import javax.xml.datatype.XMLGregorianCalendar;
 import lombok.Data;
 import lombok.Getter;
 
